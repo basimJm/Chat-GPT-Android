@@ -1,4 +1,4 @@
-package com.blackhand.chatgpt.presentation.main
+package com.blackhand.chatgpt.presentation.ui.activities
 
 import android.os.Bundle
 import android.view.Window
@@ -6,23 +6,20 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.blackhand.chatgpt.presentation.R
-import com.blackhand.chatgpt.presentation.databinding.ActivityMainBinding
+import com.blackhand.chatgpt.presentation.databinding.ActivityLogBinding
 
-class MainActivity : AppCompatActivity() {
+class LogActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityLogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+
+        binding = ActivityLogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setStatusBarGradiant()
     }
 
-    /**
-     * this function give main activity background so also change status and navigation bar
-     */
     private fun setStatusBarGradiant() {
         val window: Window = this.window
         val background = ContextCompat.getDrawable(this, R.drawable.gradient_theme)
