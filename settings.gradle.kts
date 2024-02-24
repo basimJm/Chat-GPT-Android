@@ -16,3 +16,6 @@ dependencyResolutionManagement {
 rootProject.name = "ChatGpt"
 include(":app")
 include(":presentation")
+include(":data")
+include(":domin")
+include(":core")

@@ -39,6 +39,9 @@ android {
 
 dependencies {
     implementation(project("::presentation"))
+    implementation(project("::data"))
+    implementation(project("::domin"))
+    implementation(project("::core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
