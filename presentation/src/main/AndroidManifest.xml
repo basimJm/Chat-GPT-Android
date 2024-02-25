@@ -8,7 +8,7 @@
             android:label="@string/title_activity_log"
             android:theme="@style/Theme.ChatGpt" />
         <activity
-            android:name=".ui.activities.SplashScreen"
+            android:name=".ui.activities.splashscreen.SplashScreen"
             android:exported="false" />
     </application>
 
