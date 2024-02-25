@@ -65,8 +65,10 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun splashAnimation() {
-        val sideAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_splash)
-        binding.ivLogo.startAnimation(sideAnimation)
+        val logoAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_splash)
+        val loadingAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_loading)
+        binding.ivLogo.startAnimation(logoAnimation)
+        binding.pbLoading.startAnimation(loadingAnimation)
     }
 
     private fun setStatusBarGradiant() {

@@ -1,6 +1,5 @@
 package com.blackhand.chatgpt.presentation.ui.activities.splashscreen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
@@ -31,16 +30,10 @@ class SplashViewModel @Inject constructor(private val userInfoRepository: UserIn
         viewModelScope.launch {
             _loading.emit(true)
             try {
-
                 val data = userInfoRepository.getUserInfo()
-                Log.d("USERTOKENVALID", "message is  : ${data.body()}")
                 if (data.isSuccessful) {
                     _getUserInfo.emit(data)
-                    Log.d("USERTOKENVALID", "view model response success")
-                } else {
-                    Log.d("USERTOKENVALID", "view model response failed")
                 }
-
             } catch (e: Exception) {
                 _error.emit(e)
             }
