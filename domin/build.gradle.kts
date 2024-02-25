@@ -55,4 +55,10 @@ dependencies {
     implementation(libs.moshi.lazy.adapters)
     implementation(libs.moshi.kotlin)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
 }

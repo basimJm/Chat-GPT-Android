@@ -7,6 +7,9 @@ core-ktx = "1.12.0"
 espresso-core = "3.5.1"
 junit = "4.13.2"
 kotlinx-serialization-json = "1.6.2"
+lifecycle-livedata-ktx = "2.7.0"
+lifecycle-viewmodel-savedstate = "2.7.0"
+lifecycle-viewmodel-ktx = "2.7.0"
 material = "1.11.0"
 moshi-kotlin = "1.13.0"
 moshi-lazy-adapters = "2.2"
@@ -25,6 +28,12 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
+androidx-lifecycle-reactivestreams-ktx = { module = "androidx.lifecycle:lifecycle-reactivestreams-ktx", version.ref = "lifecycle-viewmodel-savedstate" }
+androidx-lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle-viewmodel-savedstate" }
+androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-compiler", version.ref = "lifecycle-viewmodel-savedstate" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle-livedata-ktx" }
+androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycle-viewmodel-savedstate" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 androidx-navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigation-fragment-ktx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
