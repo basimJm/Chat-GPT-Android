@@ -7,17 +7,18 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.blackhand.chatgpt.core.utils.response.NetworkResult
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
 import com.blackhand.chatgpt.presentation.R
 import com.blackhand.chatgpt.presentation.databinding.ActivitySplashScreenBinding
 import com.blackhand.chatgpt.presentation.ui.activities.LogActivity
 import com.blackhand.chatgpt.presentation.ui.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
@@ -41,16 +42,32 @@ class SplashScreen : AppCompatActivity() {
     @SuppressLint("CommitPrefEdits")
     private fun initObserver() {
         lifecycleScope.launch {
-            splashViewModel.getUserInfo.collectLatest { response ->
-                if (response?.isSuccessful == true) {
-                    delay(6000)
-                    navigateToMainActivity()
-                } else {
-                    delay(6000)
-                    navigateToLogActivity()
+            splashViewModel.getUserInfo.observe(this@SplashScreen, Observer { response ->
+                when (response) {
+                    is NetworkResult.Success -> {
+                        navigateToMainActivity()
+                    }
+
+                    is NetworkResult.Loading -> {
+                        binding.pbLoading.show()
+                    }
+
+                    is NetworkResult.Error -> {
+                        showErrorDialog(response.message.toString())
+                    }
+
+                    else -> {}
                 }
-            }
+            })
         }
+    }
+
+    fun showErrorDialog(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Error")
+            .setMessage(message)
+            .setPositiveButton("OK", null)
+            .show()
     }
 
 

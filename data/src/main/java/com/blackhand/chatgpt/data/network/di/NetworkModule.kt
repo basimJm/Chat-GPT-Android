@@ -14,6 +14,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -58,6 +59,9 @@ object NetworkModule {
         return OkHttpClient
             .Builder()
             .addInterceptor(tokenInterceptor)
+            .connectTimeout(1, TimeUnit.MINUTES) // Increase connect timeout
+            .readTimeout(1, TimeUnit.MINUTES) // Increase read timeout
+            .writeTimeout(1, TimeUnit.MINUTES)
             .build()
     }
 
