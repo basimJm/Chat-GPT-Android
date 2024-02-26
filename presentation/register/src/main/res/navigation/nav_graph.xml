@@ -6,10 +6,10 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.blackhand.chatgpt.presentation.register.features.LoginFragment"
+        android:name="com.blackhand.chatgpt.presentation.register.features.signin.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.blackhand.chatgpt.presentation.register.features.SignUpFragment"
+        android:name="com.blackhand.chatgpt.presentation.register.features.signup.SignUpFragment"
         android:label="SignUpFragment" />
 </navigation>

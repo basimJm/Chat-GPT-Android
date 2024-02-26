@@ -8,7 +8,7 @@ import com.blackhand.chatgpt.core.constants.Constant.Companion.ERROR_OBJECT
 import com.blackhand.chatgpt.core.constants.Constant.Companion.SOME_THING_WENT_WRONG
 import com.blackhand.chatgpt.core.constants.Constant.Companion.STATUS_CODE
 import com.blackhand.chatgpt.core.enums.StatusCode
-import com.blackhand.chatgpt.core.utils.response.NetworkResult
+import com.blackhand.chatgpt.core.response.NetworkResult
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
 import com.blackhand.chatgpt.domin.repo.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

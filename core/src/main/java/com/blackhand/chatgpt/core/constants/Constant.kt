@@ -6,6 +6,7 @@ class Constant {
         const val USER_TOKEN = "user token"
         const val ERROR_OBJECT = "error"
         const val SOME_THING_WENT_WRONG = "some thing went wrong"
+        const val INVALID_EMAIL_OR_PASSWORD = "invalid email or password"
         const val STATUS_CODE = "statusCode"
     }
 }

@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.blackhand.chatgpt.core.utils.response.NetworkResult
+import com.blackhand.chatgpt.core.response.NetworkResult
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
 import com.blackhand.chatgpt.presentation.chat.MainActivity
-import com.blackhand.chatgpt.presentation.register.LogActivity
+import com.blackhand.chatgpt.presentation.register.features.activity.LogActivity
 import com.blackhand.chatgpt.presentation.splash.databinding.ActivitySplashScreenBinding
+import com.intuit.sdp.BuildConfig
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

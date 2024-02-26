@@ -1,4 +1,4 @@
-package com.blackhand.chatgpt.core.utils.response
+package com.blackhand.chatgpt.core.response
 
 sealed class NetworkResult<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : NetworkResult<T>(data)

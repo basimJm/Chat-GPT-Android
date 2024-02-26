@@ -1,4 +1,4 @@
-package com.blackhand.chatgpt.presentation.register.features
+package com.blackhand.chatgpt.presentation.register.features.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.blackhand.chatgpt.presentation.register
+package com.blackhand.chatgpt.presentation.register.features.activity
 
 import android.os.Bundle
 import android.view.Window
@@ -6,7 +6,9 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.blackhand.chatgpt.presentation.register.databinding.ActivityLogBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LogActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLogBinding
