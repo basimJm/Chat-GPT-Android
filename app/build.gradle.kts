@@ -38,10 +38,13 @@ android {
 }
 
 dependencies {
-    implementation(project("::presentation"))
+    implementation(project("::presentation:splash"))
+    implementation(project("::presentation:chat"))
+    implementation(project("::presentation:register"))
     implementation(project("::data"))
     implementation(project("::domin"))
     implementation(project("::core"))
+    implementation(project("::common:sharedui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

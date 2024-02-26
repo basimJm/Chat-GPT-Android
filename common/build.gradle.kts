@@ -1,13 +1,11 @@
-@Suppress("DSL_SCOPE_VIOLATION")
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.android.kotlin)
-    kotlin("kapt")
-    alias(libs.plugins.daggerHiltAndroid)
 }
 
 android {
-    namespace = "com.blackhand.chatgpt.domin"
+    namespace = "com.blackhand.chatgpt.common"
     compileSdk = 34
 
     defaultConfig {
@@ -43,22 +41,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    //Dagger Hilt
-    implementation(libs.dagger.hilt)
-    kapt(libs.dagger.hilt.compiler)
-
-    //Json
-    implementation(libs.kotlinx.serialization.json)
-
-    //moshi
-    implementation(libs.retrofit2.converter.moshi)
-    implementation(libs.moshi.lazy.adapters)
-    implementation(libs.moshi.kotlin)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
 }

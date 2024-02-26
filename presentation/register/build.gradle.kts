@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.blackhand.chatgpt.domin"
+    namespace = "com.blackhand.chatgpt.presentation.register"
     compileSdk = 34
 
     defaultConfig {
@@ -33,32 +33,48 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
 
+    implementation(project("::data"))
+    implementation(project("::common:sharedui"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.dynamic.features.fragment)
+
     //Dagger Hilt
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
 
-    //Json
-    implementation(libs.kotlinx.serialization.json)
+    //Intuit
+    implementation(libs.androidIntuit)
 
-    //moshi
-    implementation(libs.retrofit2.converter.moshi)
-    implementation(libs.moshi.lazy.adapters)
-    implementation(libs.moshi.kotlin)
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+
+    // LiveData
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    kapt(libs.androidx.lifecycle.compiler)
+    implementation(libs.androidx.lifecycle.service)
+    implementation(libs.androidx.lifecycle.reactivestreams.ktx)
 
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
 }
