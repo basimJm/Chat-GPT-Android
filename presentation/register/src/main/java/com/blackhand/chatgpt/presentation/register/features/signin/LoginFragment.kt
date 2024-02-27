@@ -1,16 +1,24 @@
 package com.blackhand.chatgpt.presentation.register.features.signin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.blackhand.chatgpt.core.constants.Constant.Companion.USER_TOKEN
 import com.blackhand.chatgpt.core.response.NetworkResult
+import com.blackhand.chatgpt.core.utils.DialogUtils.showErrorDialog
+import com.blackhand.chatgpt.core.utils.MostUsedUtils.editTextValidation
+import com.blackhand.chatgpt.core.utils.MostUsedUtils.hideKeyBoard
+import com.blackhand.chatgpt.core.utils.SharedPref.init
+import com.blackhand.chatgpt.core.utils.SharedPref.putString
+import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
 import com.blackhand.chatgpt.domin.model.request.signin.LoginRequest
 import com.blackhand.chatgpt.presentation.register.R
 import com.blackhand.chatgpt.presentation.register.databinding.FragmentLoginBinding
@@ -34,42 +42,60 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObserver()
+        init(requireContext())
         initListener()
+        initObserver()
     }
 
     private fun initObserver() {
         lifecycleScope.launch {
             loginViewModel.userLogin.observe(viewLifecycleOwner) { response ->
-                when (response) {
-                    is NetworkResult.Loading -> {
-                        binding.lpiLoading.isVisible = true
-                    }
-
-                    is NetworkResult.Success -> {
-                        Toast.makeText(requireContext(), "success login ", Toast.LENGTH_LONG)
-                            .show()
-                        binding.lpiLoading.isVisible = false
-                    }
-
-                    is NetworkResult.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            response.message.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-
-                    else -> {
-                        binding.lpiLoading.isVisible = true
-                    }
-                }
+                handleResponseState(response)
             }
         }
     }
 
+    private fun handleResponseState(response: NetworkResult<UserInfoRemoteModel?>?) {
+        when (response) {
+            is NetworkResult.Loading -> {
+                binding.lpiLoading.isVisible = true
+            }
+
+            is NetworkResult.Success -> {
+                binding.lpiLoading.isVisible = false
+                saveToken(response.data?.token.toString())
+                Log.d("USERTOKENVALID", response.data?.token.toString())
+            }
+
+            is NetworkResult.Error -> {
+                errorDialog(response.message.toString())
+                binding.lpiLoading.isVisible = false
+            }
+
+            is NetworkResult.Idle -> {
+                binding.lpiLoading.isVisible = false
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun errorDialog(message: String) {
+        showErrorDialog(
+            requireContext(), getString(com.blackhand.chatgpt.common.sharedui.R.string.error),
+            message,
+            getString(com.blackhand.chatgpt.common.sharedui.R.string.try_again),
+            true
+        )
+        NetworkResult.Loading<UserInfoRemoteModel>()
+    }
+
     private fun initListener() {
         onLoginClicked()
+        onSignUpClicked()
+    }
+
+    private fun onSignUpClicked() {
         binding.btnSignUp.setOnClickListener {
             findNavController().navigate(R.id.signUpFragment)
         }
@@ -77,10 +103,33 @@ class LoginFragment : Fragment() {
 
     private fun onLoginClicked() {
         binding.btnLogin.setOnClickListener {
-            lifecycleScope.launch {
-                val body: LoginRequest = LoginRequest("testUser@gma8il.com", "9981057402")
-                loginViewModel.fetchUserInfo(body)
+            val isValid = editTextValidation(editTextFieldsList())
+            if (isValid) {
+                hideKeyBoard(activity, requireView())
+                lifecycleScope.launch {
+
+                    loginViewModel.fetchUserInfo(fillLoginBody())
+                }
             }
         }
+    }
+
+    fun saveToken(token: String) {
+        putString(USER_TOKEN, token)
+    }
+
+    private fun fillLoginBody(): LoginRequest {
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        return LoginRequest(email, password)
+    }
+
+    private fun editTextFieldsList(): List<AppCompatEditText> {
+        return listOf(binding.etEmail, binding.etPassword)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        loginViewModel.resetResponseState()
     }
 }

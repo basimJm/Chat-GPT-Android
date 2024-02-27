@@ -1,6 +1,5 @@
 package com.blackhand.chatgpt.presentation.register.features.signin
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +24,7 @@ class LoginInViewModel @Inject constructor(private val userInfoRepository: UserI
     private val _userLogin = MutableLiveData<NetworkResult<UserInfoRemoteModel?>?>()
     val userLogin: LiveData<NetworkResult<UserInfoRemoteModel?>?> = _userLogin
 
+
     fun fetchUserInfo(loginRequest: LoginRequest) {
         viewModelScope.launch {
             _userLogin.postValue(NetworkResult.Loading())
@@ -35,9 +35,13 @@ class LoginInViewModel @Inject constructor(private val userInfoRepository: UserI
     }
 
     private fun parseJsonObject(response: Response<UserInfoRemoteModel?>): Int {
-        val errorBodyString = response.errorBody()?.string()
-        val errorObj = JSONObject(errorBodyString.toString())
-        return errorObj.getJSONObject(ERROR_OBJECT).optInt(STATUS_CODE)
+
+        val errorBodyString = response.errorBody()?.string() ?: "{}"
+        val errorObj = JSONObject(errorBodyString)
+        if (errorObj.has(ERROR_OBJECT)) {
+            return errorObj.getJSONObject(ERROR_OBJECT).optInt(STATUS_CODE)
+        }
+        return 0
     }
 
     private fun handleResponse(
@@ -49,5 +53,9 @@ class LoginInViewModel @Inject constructor(private val userInfoRepository: UserI
         } else if (errorObj == StatusCode.UNAUTHORIZED.value) {
             _userLogin.postValue(NetworkResult.Error(Constant.INVALID_EMAIL_OR_PASSWORD))
         }
+    }
+
+    fun resetResponseState() {
+        _userLogin.postValue(NetworkResult.Idle())
     }
 }

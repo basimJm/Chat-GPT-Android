@@ -32,13 +32,19 @@ class SplashViewModel @Inject constructor(private val userInfoRepository: UserIn
         viewModelScope.launch {
             _getUserInfo.postValue(NetworkResult.Loading())
             val response = userInfoRepository.getUserInfo()
-            val errorObj =
-                JSONObject(response.errorBody()!!.charStream().readText()).getJSONObject(
-                    ERROR_OBJECT
-                )
-                    .optInt(STATUS_CODE)
+            val errorObj = getErrorObject(response)
 
             handleResponse(response, errorObj)
+        }
+    }
+
+    private  fun getErrorObject(response: Response<UserInfoRemoteModel?>): Int {
+        var errorObj = JSONObject()
+        return if (errorObj.has(ERROR_OBJECT)) {
+           errorObj= JSONObject(response.errorBody()?.string().toString())
+            errorObj.getJSONObject(ERROR_OBJECT).optInt(STATUS_CODE)
+        } else {
+            0
         }
     }
 
