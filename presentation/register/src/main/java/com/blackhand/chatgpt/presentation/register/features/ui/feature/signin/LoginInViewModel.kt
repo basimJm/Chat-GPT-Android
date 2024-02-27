@@ -1,4 +1,4 @@
-package com.blackhand.chatgpt.presentation.register.features.signin
+package com.blackhand.chatgpt.presentation.register.features.ui.feature.signin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.blackhand.chatgpt.core.constants.Constant.Companion.STATUS_CODE
 import com.blackhand.chatgpt.core.enums.StatusCode
 import com.blackhand.chatgpt.core.response.NetworkResult
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
-import com.blackhand.chatgpt.domin.model.request.signin.LoginRequest
+import com.blackhand.chatgpt.domin.model.request.signin.LoginRequestModel
 import com.blackhand.chatgpt.domin.repo.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class LoginInViewModel @Inject constructor(private val userInfoRepository: UserI
     val userLogin: LiveData<NetworkResult<UserInfoRemoteModel?>?> = _userLogin
 
 
-    fun fetchUserInfo(loginRequest: LoginRequest) {
+    fun fetchUserInfo(loginRequest: LoginRequestModel) {
         viewModelScope.launch {
             _userLogin.postValue(NetworkResult.Loading())
             val response = userInfoRepository.loginUser(loginRequest)

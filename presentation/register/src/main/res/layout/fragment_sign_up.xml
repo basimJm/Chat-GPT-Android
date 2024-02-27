@@ -29,7 +29,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_login"
+        android:id="@+id/tv_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_60sdp"
@@ -42,6 +42,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_name"
+        style="@style/EditTextStyle"
+        android:drawableStart="@drawable/ic_user"
+        android:hint="@string/name"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sign_up" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_email"
@@ -52,13 +62,14 @@
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_phone_mumber"
+        android:id="@+id/et_phone_number"
         style="@style/EditTextStyle"
         android:drawableStart="@drawable/baseline_phone_24"
         android:hint="@string/phone_number"
+        android:inputType="number"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,19 +79,20 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_password"
         style="@style/EditTextStyle"
-        android:drawableStart="@drawable/ic_user"
-        android:hint="@string/email"
+        android:drawableStart="@drawable/ic_password"
+        android:hint="@string/password"
         android:textColor="@color/black"
+        android:inputType="textPassword"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_phone_mumber" />
+        app:layout_constraintTop_toBottomOf="@+id/et_phone_number" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_confirm_password"
         style="@style/EditTextStyle"
         android:drawableStart="@drawable/ic_password"
-        android:hint="@string/password"
+        android:hint="@string/confirm_password"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"

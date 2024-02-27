@@ -5,13 +5,14 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.FragmentActivity
+import com.blackhand.chatgpt.core.constants.Constant.Companion.IS_REQUIRED
 
 object MostUsedUtils {
     fun editTextValidation(list: List<AppCompatEditText>): Boolean {
         var isValid = false
         list.forEach {
             if (it.text.toString().isEmpty()) {
-                it.error = "${it.hint} is required"
+                it.error = "${it.hint} $IS_REQUIRED"
                 isValid = false
             } else {
                 it.error = null

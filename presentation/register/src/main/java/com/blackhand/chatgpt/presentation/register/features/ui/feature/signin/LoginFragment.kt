@@ -1,7 +1,6 @@
-package com.blackhand.chatgpt.presentation.register.features.signin
+package com.blackhand.chatgpt.presentation.register.features.ui.feature.signin
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.blackhand.chatgpt.common.sharedui.dialog.ErrorDialog
 import com.blackhand.chatgpt.core.constants.Constant.Companion.USER_TOKEN
 import com.blackhand.chatgpt.core.response.NetworkResult
-import com.blackhand.chatgpt.core.utils.DialogUtils.showErrorDialog
 import com.blackhand.chatgpt.core.utils.MostUsedUtils.editTextValidation
 import com.blackhand.chatgpt.core.utils.MostUsedUtils.hideKeyBoard
 import com.blackhand.chatgpt.core.utils.SharedPref.init
 import com.blackhand.chatgpt.core.utils.SharedPref.putString
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
-import com.blackhand.chatgpt.domin.model.request.signin.LoginRequest
+import com.blackhand.chatgpt.domin.model.request.signin.LoginRequestModel
 import com.blackhand.chatgpt.presentation.register.R
 import com.blackhand.chatgpt.presentation.register.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +26,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
-
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginInViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,12 +38,15 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(requireContext())
+        initPreference()
         initListener()
         initObserver()
+    }
+
+    private fun initPreference() {
+        init(requireContext())
     }
 
     private fun initObserver() {
@@ -64,7 +66,6 @@ class LoginFragment : Fragment() {
             is NetworkResult.Success -> {
                 binding.lpiLoading.isVisible = false
                 saveToken(response.data?.token.toString())
-                Log.d("USERTOKENVALID", response.data?.token.toString())
             }
 
             is NetworkResult.Error -> {
@@ -78,16 +79,6 @@ class LoginFragment : Fragment() {
 
             else -> {}
         }
-    }
-
-    private fun errorDialog(message: String) {
-        showErrorDialog(
-            requireContext(), getString(com.blackhand.chatgpt.common.sharedui.R.string.error),
-            message,
-            getString(com.blackhand.chatgpt.common.sharedui.R.string.try_again),
-            true
-        )
-        NetworkResult.Loading<UserInfoRemoteModel>()
     }
 
     private fun initListener() {
@@ -114,14 +105,22 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun saveToken(token: String) {
+    private fun errorDialog(message: String) {
+        ErrorDialog.showErrorDialog(
+            requireContext(), getString(com.blackhand.chatgpt.common.sharedui.R.string.error),
+            message,
+            getString(com.blackhand.chatgpt.common.sharedui.R.string.try_again)
+        )
+    }
+
+    private fun saveToken(token: String) {
         putString(USER_TOKEN, token)
     }
 
-    private fun fillLoginBody(): LoginRequest {
+    private fun fillLoginBody(): LoginRequestModel {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
-        return LoginRequest(email, password)
+        return LoginRequestModel(email, password)
     }
 
     private fun editTextFieldsList(): List<AppCompatEditText> {

@@ -1,7 +1,7 @@
 package com.blackhand.chatgpt.presentation.splash
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blackhand.chatgpt.core.constants.Constant.Companion.ERROR_OBJECT
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(private val userInfoRepository: UserInfoRepository) :
     ViewModel() {
-    private val _getUserInfo = MediatorLiveData<NetworkResult<UserInfoRemoteModel?>?>()
+    private val _getUserInfo = MutableLiveData<NetworkResult<UserInfoRemoteModel?>?>()
     val getUserInfo: LiveData<NetworkResult<UserInfoRemoteModel?>?> = _getUserInfo
 
 
@@ -38,10 +38,10 @@ class SplashViewModel @Inject constructor(private val userInfoRepository: UserIn
         }
     }
 
-    private  fun getErrorObject(response: Response<UserInfoRemoteModel?>): Int {
+    private fun getErrorObject(response: Response<UserInfoRemoteModel?>): Int {
         var errorObj = JSONObject()
         return if (errorObj.has(ERROR_OBJECT)) {
-           errorObj= JSONObject(response.errorBody()?.string().toString())
+            errorObj = JSONObject(response.errorBody()?.string().toString())
             errorObj.getJSONObject(ERROR_OBJECT).optInt(STATUS_CODE)
         } else {
             0
@@ -54,7 +54,7 @@ class SplashViewModel @Inject constructor(private val userInfoRepository: UserIn
     ) {
         if (response.isSuccessful && response.body() != null) {
             _getUserInfo.postValue(NetworkResult.Success(response.body()))
-        } else if (errorObj == StatusCode.INVALID_TOKEN.value) {
+        } else if (response.code() == StatusCode.INVALID_TOKEN.value || errorObj == StatusCode.INVALID_TOKEN.value) {
             _getUserInfo.postValue(NetworkResult.Error(SOME_THING_WENT_WRONG))
         }
     }

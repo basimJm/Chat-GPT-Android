@@ -1,6 +1,6 @@
 package com.blackhand.chatgpt.data.network.di
 
-import com.blackhand.chatgpt.data.service.UserDaraSource
+import com.blackhand.chatgpt.data.service.UserDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideDataSource(retrofit: Retrofit): UserDaraSource {
-        return retrofit.create(UserDaraSource::class.java)
+    fun provideDataSource(retrofit: Retrofit): UserDataSource {
+        return retrofit.create(UserDataSource::class.java)
     }
 }

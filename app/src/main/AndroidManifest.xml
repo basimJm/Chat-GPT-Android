@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.register.features.activity.LogActivity"
+            android:name=".presentation.register.features.ui.activity.LogActivity"
             android:exported="false">
 
         </activity>

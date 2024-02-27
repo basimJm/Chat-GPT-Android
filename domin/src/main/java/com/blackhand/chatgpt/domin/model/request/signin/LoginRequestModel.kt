@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class LoginRequest(
+data class LoginRequestModel(
     @Json(name = "email")
     var email: String? = null,
     @Json(name = "password")

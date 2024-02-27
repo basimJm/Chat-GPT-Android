@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.blackhand.chatgpt.core.response.NetworkResult
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
 import com.blackhand.chatgpt.presentation.chat.MainActivity
-import com.blackhand.chatgpt.presentation.register.features.activity.LogActivity
+import com.blackhand.chatgpt.presentation.register.features.ui.activity.LogActivity
 import com.blackhand.chatgpt.presentation.splash.databinding.ActivitySplashScreenBinding
 import com.intuit.sdp.BuildConfig
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.blackhand.chatgpt.presentation.register.features.activity
+package com.blackhand.chatgpt.presentation.register.features.ui.activity
 
 import android.os.Bundle
 import android.view.Window

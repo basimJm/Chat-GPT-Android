@@ -1,7 +1,7 @@
 package com.blackhand.chatgpt.data.network.di
 
 import com.blackhand.chatgpt.data.repo.UserInfoRepositoryImpl
-import com.blackhand.chatgpt.data.service.UserDaraSource
+import com.blackhand.chatgpt.data.service.UserDataSource
 import com.blackhand.chatgpt.domin.repo.UserInfoRepository
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideUserInfoImpl(userDataSource: UserDaraSource): UserInfoRepository {
+    fun provideUserInfoImpl(userDataSource: UserDataSource): UserInfoRepository {
         return UserInfoRepositoryImpl(userDataSource)
     }
 }
