@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0"
+            app:layout_constraintBottom_toTopOf="@+id/ll_layout_bar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"
+            tools:listitem="@layout/item_chat_history"
+            app:stackFromEnd="true"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pb_chat_loading"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:indeterminate="true"
+            android:visibility="visible"
+            android:layout_margin="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/ll_layout_bar"/>
+
+        <LinearLayout
+            android:id="@+id/ll_layout_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/et_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight=".5"
+                android:background="@color/gray"
+                android:backgroundTint="@android:color/white"
+                android:hint="Type a message..."
+                android:inputType="textShortMessage"
+                android:padding="10dp"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@color/barby"
+                android:backgroundTint="#26A69A"
+                android:text="Send"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

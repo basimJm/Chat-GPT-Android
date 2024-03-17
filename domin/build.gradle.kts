@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.kotlin)
     kotlin("kapt")
     alias(libs.plugins.daggerHiltAndroid)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -32,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 

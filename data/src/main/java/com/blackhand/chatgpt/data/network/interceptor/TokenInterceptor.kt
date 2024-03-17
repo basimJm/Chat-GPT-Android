@@ -15,7 +15,7 @@ class TokenInterceptor @Inject constructor(private val sharedPreferences: Shared
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = sharedPreferences.getString(USER_TOKEN, DEFAULT_VALUE)
         val newRequest = chain.request().newBuilder()
-            .addHeader(AUTHORIZATION, "$BEARER token ")
+            .addHeader(AUTHORIZATION, "$BEARER $token ")
             .build()
         return chain.proceed(newRequest)
     }

@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    implementation(project("::data"))
+
     implementation(project("::common:sharedui"))
     implementation(project("::presentation:register"))
     implementation(project("::presentation:chat"))

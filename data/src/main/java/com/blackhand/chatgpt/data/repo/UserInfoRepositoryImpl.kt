@@ -4,6 +4,7 @@ import com.blackhand.chatgpt.data.service.UserDataSource
 import com.blackhand.chatgpt.domin.model.UserInfoRemoteModel
 import com.blackhand.chatgpt.domin.model.request.signin.LoginRequestModel
 import com.blackhand.chatgpt.domin.model.request.signup.CreateUserRequestModel
+import com.blackhand.chatgpt.domin.model.sessions.SessionsHistory
 import com.blackhand.chatgpt.domin.repo.UserInfoRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -20,5 +21,12 @@ class UserInfoRepositoryImpl @Inject constructor(private val userDataSource: Use
 
     override suspend fun sighUpUser(createUserRequest: CreateUserRequestModel): Response<UserInfoRemoteModel?> {
         return userDataSource.createUser(createUserRequest)
+    }
+
+    override suspend fun getUserChatHistory(
+        userID: String,
+        sessionID: String
+    ): Response<SessionsHistory?> {
+        return userDataSource.getUserChatHistory(userID,sessionID)
     }
 }
